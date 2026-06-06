@@ -1,0 +1,61 @@
+:root {
+  /* Background */
+  --bg-base:          #121212;
+  --bg-surface:       #1a1a1a;
+  --bg-elevated:      #222222;
+
+  /* Text */
+  --text-primary:     #f0f0f0;
+  --text-secondary:   #888888;
+  --text-dim:         #444444;
+
+  /* Divider / border */
+  --border-subtle:    #2a2a2a;
+  --border-dim:       #1e1e1e;
+
+  /* Accent (focus ring, etc.) */
+  --color-accent:     #f0f0f0;
+
+  /* Pitch colors */
+  --pitch-red:        #C51F25;
+  --pitch-red-dim:    #3d0809;
+  --pitch-yellow:     #FEEC08;
+  --pitch-yellow-dim: #3d3900;
+  --pitch-blue:       #2A8BCC;
+  --pitch-blue-dim:   #0a2233;
+
+  /* Attack value color */
+  --color-attack:     #FEEC08;
+
+  /* Action point */
+  --ap-active:        #f0f0f0;
+  --ap-inactive:      #2a2a2a;
+
+  /* Typography */
+  --font-family:      'Inter', 'SF Pro Display', 'Roboto', system-ui, sans-serif;
+
+  --font-life:        clamp(88px, 22vw, 140px);
+  --font-attack:      clamp(64px, 16vw, 100px);
+  --font-label:       clamp(11px, 2.8vw, 14px);
+  --font-keyword:     clamp(12px, 3vw, 15px);
+  --font-center:      clamp(11px, 2.6vw, 13px);
+
+  /* Spacing */
+  --space-xs:         4px;
+  --space-sm:         8px;
+  --space-md:         16px;
+  --space-lg:         24px;
+  --space-xl:         32px;
+
+  /* Radii */
+  --radius-pill:      999px;
+  --radius-sm:        6px;
+  --radius-md:        10px;
+
+  /* Center bar */
+  --center-bar-h:     48px;
+
+  /* Transition */
+  --transition-fast:  120ms ease;
+  --transition-med:   220ms ease;
+}
