@@ -1,18 +1,42 @@
 /* ── Center panel (permanent column) ───────────────── */
 
 .cc-panel {
+  /* Collapsed: zero-width so the side columns fill the screen */
+  width: 0;
   height: 100%;
   background: #000;
-  border-left: 2px solid #555;
-  border-right: 2px solid #555;
-  padding: clamp(12px, 2vh, 28px) clamp(10px, 1.4vw, 24px);
+  border-left: 0 solid #555;
+  border-right: 0 solid #555;
+  padding: clamp(12px, 2vh, 28px) 0;
+  opacity: 0;
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
   overflow: hidden;
+  transition: width var(--transition-med) ease,
+              padding var(--transition-med) ease,
+              border-width var(--transition-med) ease,
+              border-color var(--transition-med) ease,
+              opacity var(--transition-med) ease;
 }
+
+/* Open: grow to full width — the grid's auto column tracks it and
+   pushes the player columns aside */
+#app.is-chain-open .cc-panel {
+  width: clamp(280px, 34vw, 520px);
+  border-left-width: 2px;
+  border-right-width: 2px;
+  padding: clamp(12px, 2vh, 28px) clamp(10px, 1.4vw, 24px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel border lights up on the active player's side */
+#app.is-chain-open.active-p1 .cc-panel { border-left-color:  var(--life-p1); }
+#app.is-chain-open.active-p2 .cc-panel { border-right-color: var(--life-p2); }
 
 /* ── Keywords ──────────────────────────────────────── */
 
@@ -114,9 +138,11 @@
   display: flex;
   align-items: center;
   width: 100%;
+  /* break out of the panel's horizontal padding → full-width rules */
+  margin-inline: calc(-1 * clamp(10px, 1.4vw, 24px));
   gap: var(--space-sm);
-  border: 2px solid #f0f0f0;
-  border-radius: var(--radius-sm);
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
   padding: var(--space-xs) var(--space-md);
 }
 

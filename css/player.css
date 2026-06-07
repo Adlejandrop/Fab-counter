@@ -1,6 +1,7 @@
 /* ── Player column ─────────────────────────────────── */
 
 .player {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -9,6 +10,28 @@
   gap: var(--space-md);
   overflow: hidden;
 }
+
+.player--left  { padding-left:  clamp(34px, 7vmin, 70px); }
+.player--right { padding-right: clamp(34px, 7vmin, 70px); }
+
+/* ── Active-player turn bar ────────────────────────── */
+
+.turn-bar {
+  position: absolute;
+  top: clamp(10px, 4vmin, 44px);
+  bottom: clamp(10px, 4vmin, 44px);
+  width: clamp(16px, 3vmin, 34px);
+  opacity: 0.22;                 /* inactive player */
+  transition: opacity var(--transition-med);
+}
+
+.turn-bar.is-active { opacity: 1; }
+
+.player--left  .turn-bar { left: 0;  background: var(--life-p1); border-radius: 0 var(--radius-pill) var(--radius-pill) 0; }
+.player--right .turn-bar { right: 0; background: var(--life-p2); border-radius: var(--radius-pill) 0 0 var(--radius-pill); }
+
+/* Turn bars hide while the combat chain is open */
+#app.is-chain-open .turn-bar { opacity: 0; pointer-events: none; }
 
 /* ── Counter row: [−] [value] [+] ──────────────────── */
 

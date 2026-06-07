@@ -1,5 +1,18 @@
 const CombatChain = (() => {
-  let _attackValueEl, _indicatorEl, _prevBtn, _nextBtn;
+  let _attackValueEl, _indicatorEl, _prevBtn, _nextBtn, _app, _panel, _openBtn;
+
+  function open() {
+    State.setChainOpen(true);
+    _app.classList.add('is-chain-open');
+    _render();
+  }
+
+  function close() {
+    State.resetCombatChain();
+    State.setChainOpen(false);
+    _app.classList.remove('is-chain-open');
+    _render();
+  }
 
   function _render() {
     const cc    = State.getCombatChain();
@@ -27,15 +40,18 @@ const CombatChain = (() => {
   }
 
   function init() {
+    _app           = document.getElementById('app');
+    _panel         = document.getElementById('cc-panel');
+    _openBtn       = document.getElementById('cc-open-btn');
     _attackValueEl = document.getElementById('cc-attack-value');
     _indicatorEl   = document.getElementById('cc-link-indicator');
     _prevBtn       = document.getElementById('cc-prev');
     _nextBtn       = document.getElementById('cc-next');
 
-    document.getElementById('cc-close-btn').addEventListener('click', () => {
-      State.resetCombatChain();
-      _render();
-    });
+    _openBtn.addEventListener('click', open);
+
+    /* close chain → reset links and collapse back to the icon */
+    document.getElementById('cc-close-btn').addEventListener('click', close);
 
     document.getElementById('cc-next-link-btn').addEventListener('click', () => {
       State.addChainLink();

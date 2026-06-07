@@ -18,11 +18,13 @@ const State = (() => {
   const _min = { life: 0, pitch: 0, ap: 0 };
 
   const _state = {
+    activePlayer: 1,
     players: {
-      1: { life: 40, pitch: 1, ap: 1 },
-      2: { life: 40, pitch: 1, ap: 1 },
+      1: { life: 40, pitch: 1, ap: 0 },
+      2: { life: 40, pitch: 1, ap: 0 },
     },
     combatChain: {
+      open: false,
       links: [_emptyLink()],
       currentIndex: 0,
     },
@@ -30,6 +32,23 @@ const State = (() => {
 
   function getPlayer(id) {
     return _state.players[id];
+  }
+
+  /* ── Active player / turns ─────────────────────────── */
+
+  function getActivePlayer() {
+    return _state.activePlayer;
+  }
+
+  /* The active player ends their turn: their AP → 0, opponent's → 1,
+     and the turn passes. Only the active player may end the turn. */
+  function endTurn(playerId) {
+    if (_state.activePlayer !== playerId) return false;
+    const other = playerId === 1 ? 2 : 1;
+    _state.players[playerId].ap = 0;
+    _state.players[other].ap    = 1;
+    _state.activePlayer         = other;
+    return true;
   }
 
   function changeCounter(playerId, counter, delta) {
@@ -42,6 +61,14 @@ const State = (() => {
 
   function getCombatChain() {
     return _state.combatChain;
+  }
+
+  function isChainOpen() {
+    return _state.combatChain.open;
+  }
+
+  function setChainOpen(open) {
+    _state.combatChain.open = open;
   }
 
   function getCurrentLink() {
@@ -85,8 +112,12 @@ const State = (() => {
 
   return {
     getPlayer,
+    getActivePlayer,
+    endTurn,
     changeCounter,
     getCombatChain,
+    isChainOpen,
+    setChainOpen,
     getCurrentLink,
     resetCombatChain,
     addChainLink,

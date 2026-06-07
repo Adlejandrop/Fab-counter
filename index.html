@@ -18,8 +18,10 @@
 
     <div id="app">
 
-      <!-- PLAYER 1 — left column -->
+      <!-- PLAYER 1 — left -->
       <section class="player player--left" id="player1" data-player="1">
+
+        <button class="turn-bar" data-player="1" aria-label="End Player 1 turn"></button>
 
         <div class="counter counter--life">
           <button class="counter__btn counter__btn--dec" data-counter="life" data-delta="-1" aria-label="Decrease life">−</button>
@@ -37,46 +39,54 @@
 
         <div class="counter counter--ap">
           <button class="counter__btn counter__btn--dec" data-counter="ap" data-delta="-1" aria-label="Decrease action points">−</button>
-          <span class="counter__value" id="p1-ap">1</span>
+          <span class="counter__value" id="p1-ap">0</span>
           <button class="counter__btn counter__btn--inc" data-counter="ap" data-delta="1" aria-label="Increase action points">+</button>
           <span class="counter__label">action points</span>
         </div>
 
       </section>
 
-      <!-- COMBAT CHAIN — permanent center column -->
-      <section class="cc-panel" aria-label="Combat Chain">
+      <!-- CENTER — flesh icon (collapsed) / combat chain (expanded) -->
+      <div class="center" id="center">
+        <span class="center__divider" aria-hidden="true"></span>
 
-        <div class="cc-keywords" role="group" aria-label="Attack keywords">
-          <button class="cc-keyword" data-keyword="go-again"  aria-pressed="false">go again</button>
-          <button class="cc-keyword" data-keyword="dominate"  aria-pressed="false">dominate</button>
-          <button class="cc-keyword" data-keyword="on-hit"    aria-pressed="false">on hit</button>
-          <button class="cc-keyword" data-keyword="piercing"  aria-pressed="false">piercing</button>
-          <button class="cc-keyword" data-keyword="overpower" aria-pressed="false">overpower</button>
-          <button class="cc-keyword" data-keyword="other"     aria-pressed="false">other</button>
-        </div>
+        <button class="cc-open-btn" id="cc-open-btn" aria-label="Open combat chain"></button>
 
-        <div class="cc-attack-row">
-          <button class="cc-attack-btn cc-attack-btn--minus" id="cc-attack-minus" aria-label="Decrease attack">−</button>
-          <button class="cc-attack-value" id="cc-attack-value" aria-pressed="false" aria-label="Toggle attack hit">12</button>
-          <button class="cc-attack-btn cc-attack-btn--plus"  id="cc-attack-plus"  aria-label="Increase attack">+</button>
-        </div>
+        <section class="cc-panel" id="cc-panel" aria-label="Combat Chain">
 
-        <div class="cc-nav">
-          <button class="cc-nav-btn" id="cc-prev" aria-label="Previous chain link" disabled>&#8592;</button>
-          <span class="cc-link-indicator" id="cc-link-indicator">Link 1 of 1</span>
-          <button class="cc-nav-btn" id="cc-next" aria-label="Next chain link" disabled>&#8594;</button>
-        </div>
+          <div class="cc-keywords" role="group" aria-label="Attack keywords">
+            <button class="cc-keyword" data-keyword="go-again"  aria-pressed="false">go again</button>
+            <button class="cc-keyword" data-keyword="dominate"  aria-pressed="false">dominate</button>
+            <button class="cc-keyword" data-keyword="on-hit"    aria-pressed="false">on hit</button>
+            <button class="cc-keyword" data-keyword="piercing"  aria-pressed="false">piercing</button>
+            <button class="cc-keyword" data-keyword="overpower" aria-pressed="false">overpower</button>
+            <button class="cc-keyword" data-keyword="other"     aria-pressed="false">other</button>
+          </div>
 
-        <div class="cc-actions">
-          <button class="cc-next-link-btn" id="cc-next-link-btn">next link</button>
-          <button class="cc-close-btn" id="cc-close-btn">close chain</button>
-        </div>
+          <div class="cc-attack-row">
+            <button class="cc-attack-btn cc-attack-btn--minus" id="cc-attack-minus" aria-label="Decrease attack">−</button>
+            <button class="cc-attack-value" id="cc-attack-value" aria-pressed="false" aria-label="Toggle attack hit">0</button>
+            <button class="cc-attack-btn cc-attack-btn--plus"  id="cc-attack-plus"  aria-label="Increase attack">+</button>
+          </div>
 
-      </section>
+          <div class="cc-nav">
+            <button class="cc-nav-btn" id="cc-prev" aria-label="Previous chain link" disabled>&#8592;</button>
+            <span class="cc-link-indicator" id="cc-link-indicator">Link 1 of 1</span>
+            <button class="cc-nav-btn" id="cc-next" aria-label="Next chain link" disabled>&#8594;</button>
+          </div>
 
-      <!-- PLAYER 2 — right column -->
+          <div class="cc-actions">
+            <button class="cc-next-link-btn" id="cc-next-link-btn">next link</button>
+            <button class="cc-close-btn" id="cc-close-btn">close chain</button>
+          </div>
+
+        </section>
+      </div>
+
+      <!-- PLAYER 2 — right -->
       <section class="player player--right" id="player2" data-player="2">
+
+        <button class="turn-bar" data-player="2" aria-label="End Player 2 turn"></button>
 
         <div class="counter counter--life">
           <button class="counter__btn counter__btn--dec" data-counter="life" data-delta="-1" aria-label="Decrease life">−</button>
@@ -94,7 +104,7 @@
 
         <div class="counter counter--ap">
           <button class="counter__btn counter__btn--dec" data-counter="ap" data-delta="-1" aria-label="Decrease action points">−</button>
-          <span class="counter__value" id="p2-ap">1</span>
+          <span class="counter__value" id="p2-ap">0</span>
           <button class="counter__btn counter__btn--inc" data-counter="ap" data-delta="1" aria-label="Increase action points">+</button>
           <span class="counter__label">action points</span>
         </div>
