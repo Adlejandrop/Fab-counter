@@ -1,17 +1,28 @@
 const State = (() => {
   function _emptyLink() {
-    return { attackValue: 0, keywords: { 'go-again': false, dominate: false, overpower: false } };
+    return {
+      attackValue: 0,
+      hit: false,
+      keywords: {
+        'go-again':  false,
+        dominate:    false,
+        'on-hit':    false,
+        piercing:    false,
+        overpower:   false,
+        other:       false,
+      },
+    };
   }
 
+  /* Per-counter floors */
+  const _min = { life: 0, pitch: 0, ap: 0 };
+
   const _state = {
-    activePlayer: 1,
     players: {
-      1: { life: 20, actionPoints: 1, pitch: { red: false, yellow: false, blue: false } },
-      2: { life: 20, actionPoints: 0, pitch: { red: false, yellow: false, blue: false } },
+      1: { life: 40, pitch: 1, ap: 1 },
+      2: { life: 40, pitch: 1, ap: 1 },
     },
     combatChain: {
-      open: false,
-      active: false,
       links: [_emptyLink()],
       currentIndex: 0,
     },
@@ -21,40 +32,13 @@ const State = (() => {
     return _state.players[id];
   }
 
-  function setLife(playerId, value) {
-    _state.players[playerId].life = value;
-  }
-
-  function getActivePlayer() {
-    return _state.activePlayer;
-  }
-
-  function setActivePlayer(id) {
-    const prev = _state.activePlayer;
-    if (prev === id) return;
-    _state.players[prev].actionPoints = 0;
-    _state.players[id].actionPoints   = 1;
-    _state.activePlayer = id;
-  }
-
-  function changeActionPoints(playerId, delta) {
+  function changeCounter(playerId, counter, delta) {
     const p = _state.players[playerId];
-    p.actionPoints = Math.max(0, p.actionPoints + delta);
-    return p.actionPoints;
+    p[counter] = Math.max(_min[counter], p[counter] + delta);
+    return p[counter];
   }
 
-  function togglePitch(playerId, color) {
-    const pitch = _state.players[playerId].pitch;
-    pitch[color] = !pitch[color];
-    return pitch[color];
-  }
-
-  function resetPitch(playerId) {
-    const pitch = _state.players[playerId].pitch;
-    pitch.red = false;
-    pitch.yellow = false;
-    pitch.blue = false;
-  }
+  /* ── Combat chain ──────────────────────────────────── */
 
   function getCombatChain() {
     return _state.combatChain;
@@ -65,14 +49,7 @@ const State = (() => {
     return cc.links[cc.currentIndex];
   }
 
-  function openCombatChain() {
-    _state.combatChain.open   = true;
-    _state.combatChain.active = true;
-  }
-
-  function closeCombatChain() {
-    _state.combatChain.open         = false;
-    _state.combatChain.active       = false;
+  function resetCombatChain() {
     _state.combatChain.links        = [_emptyLink()];
     _state.combatChain.currentIndex = 0;
   }
@@ -100,21 +77,22 @@ const State = (() => {
     return kw[keyword];
   }
 
+  function toggleHit() {
+    const link = getCurrentLink();
+    link.hit = !link.hit;
+    return link.hit;
+  }
+
   return {
     getPlayer,
-    getActivePlayer,
-    setLife,
-    setActivePlayer,
-    changeActionPoints,
-    togglePitch,
-    resetPitch,
+    changeCounter,
     getCombatChain,
     getCurrentLink,
-    openCombatChain,
-    closeCombatChain,
+    resetCombatChain,
     addChainLink,
     navigateLink,
     setAttackValue,
     toggleKeyword,
+    toggleHit,
   };
 })();

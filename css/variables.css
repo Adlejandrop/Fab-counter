@@ -25,20 +25,37 @@
   --pitch-blue-dim:   #0a2233;
 
   /* Attack value color */
-  --color-attack:     #FEEC08;
+  --color-attack:     #ffde59;
+
+  /* Player life outline colors */
+  --life-p1:          #F47A1F;  /* orange */
+  --life-p2:          #2A7BE4;  /* blue   */
+
+  /* Counter +/- glyph colors */
+  --counter-red:      #E23B3B;
+  --counter-white:    #f0f0f0;
+
+  /* Pitch disc */
+  --pitch-disc-bg:    #6f6f6f;
 
   /* Action point */
   --ap-active:        #f0f0f0;
   --ap-inactive:      #2a2a2a;
 
-  /* Typography */
-  --font-family:      'Inter', 'SF Pro Display', 'Roboto', system-ui, sans-serif;
+  /* Typography — system sans-serif renders the outline stroke cleanly */
+  --font-family:      Arial, 'Helvetica Neue', Helvetica, system-ui, sans-serif;
 
-  --font-life:        clamp(88px, 22vw, 140px);
-  --font-attack:      clamp(64px, 16vw, 100px);
-  --font-label:       clamp(11px, 2.8vw, 14px);
-  --font-keyword:     clamp(12px, 3vw, 15px);
-  --font-center:      clamp(11px, 2.6vw, 13px);
+  /* Big numbers sized by vmin = the landscape layout's short (height) side,
+     so they stay correct whether the device is landscape or portrait-rotated */
+  --font-life:        clamp(48px, 18vmin, 150px);
+  --font-pitch:       clamp(30px, 11vmin, 88px);
+  --font-ap:          clamp(40px, 15vmin, 120px);
+  --font-attack:      clamp(72px, 30vmin, 280px);
+  --font-glyph:       clamp(34px, 11vmin, 84px);
+  --font-label:       clamp(11px, 2.6vmin, 24px);
+  --font-ap-label:    clamp(9px, 2vmin, 18px);
+  --font-keyword:     clamp(8px, 2.2vmin, 18px);
+  --font-center:      clamp(11px, 2.6vmin, 13px);
 
   /* Spacing */
   --space-xs:         4px;

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220" fill="#8e1414">
+  <!-- central mass -->
+  <path d="M118 96c18-14 52-16 70-4 16 11 22 30 10 44-9 11-30 16-50 15-23-1-46-6-55-19-8-12-2-25 25-36z"/>
+  <ellipse cx="150" cy="118" rx="48" ry="26"/>
+  <ellipse cx="120" cy="104" rx="22" ry="15"/>
+  <ellipse cx="186" cy="110" rx="20" ry="14"/>
+  <!-- runs / drips -->
+  <path d="M104 118c-4 14-6 30-3 44 1 6 6 8 8 2 4-13 4-31 1-45-1-5-5-6-6-1z"/>
+  <path d="M198 112c6 8 14 14 24 16 5 1 6-3 2-6-8-6-16-12-21-15-4-2-7 1-5 5z"/>
+  <!-- scattered droplets -->
+  <circle cx="206" cy="74" r="6"/>
+  <circle cx="224" cy="64" r="3.5"/>
+  <circle cx="238" cy="80" r="4.5"/>
+  <circle cx="248" cy="58" r="2.5"/>
+  <circle cx="86" cy="138" r="5"/>
+  <circle cx="72" cy="150" r="3"/>
+  <circle cx="60" cy="132" r="2.2"/>
+  <circle cx="222" cy="142" r="4"/>
+  <circle cx="240" cy="150" r="2.6"/>
+  <circle cx="158" cy="158" r="5.5"/>
+  <circle cx="176" cy="166" r="3"/>
+  <circle cx="132" cy="62" r="4"/>
+  <circle cx="120" cy="50" r="2.4"/>
+  <circle cx="196" cy="150" r="3.2"/>
+  <!-- thin spatter streaks -->
+  <path d="M210 70c10-6 22-9 34-9 4 0 4 4 0 5-11 1-22 4-31 9-4 2-6-3-3-5z"/>
+  <path d="M150 150c-8 6-14 14-18 24-2 4 3 6 5 2 4-9 10-17 17-22 3-3 0-6-4-4z"/>
+</svg>

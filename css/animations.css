@@ -1,4 +1,4 @@
-/* Life number tap flash */
+/* Counter tap flash */
 @keyframes flash-up {
   0%   { color: #6fcf97; }
   100% { color: var(--text-primary); }
@@ -9,51 +9,28 @@
   100% { color: var(--text-primary); }
 }
 
-.player__life-number.flash--up {
+.counter__value.flash--up {
   animation: flash-up 400ms var(--transition-fast) forwards;
 }
 
-.player__life-number.flash--down {
+.counter__value.flash--down {
   animation: flash-down 400ms var(--transition-fast) forwards;
 }
 
-/* Combat chain overlay fade */
-@keyframes overlay-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes panel-in {
-  from { opacity: 0; transform: translateY(12px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)    scale(1); }
-}
-
-.cc-overlay.is-open {
-  animation: overlay-in var(--transition-med) ease forwards;
-}
-
-.cc-overlay.is-open .cc-panel {
-  animation: panel-in var(--transition-med) ease forwards;
-}
-
-/* Pitch dot tap pop */
-@keyframes dot-pop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-.pitch-dot.popping {
-  animation: dot-pop 180ms ease forwards;
-}
-
-/* Life number scale bump on change */
+/* Counter scale bump on change */
 @keyframes life-bump {
   0%   { transform: scale(1); }
   30%  { transform: scale(1.06); }
   100% { transform: scale(1); }
 }
 
-.player__life-number.bumping {
+.counter__value.bumping {
   animation: life-bump 200ms ease forwards;
+}
+
+/* Blood splat pop when attack is marked as a hit */
+@keyframes blood-splat-in {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+  60%  { opacity: 1; transform: scale(1.12) rotate(-8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-8deg); }
 }

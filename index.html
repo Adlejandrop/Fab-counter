@@ -18,81 +18,49 @@
 
     <div id="app">
 
-      <!-- PLAYER 2 — top, rotated 180° (identical DOM to P1; rotation mirrors it) -->
-      <section class="player player--top" id="player2" data-player="2">
-        <div class="player__indicators">
-          <div class="player__pitch" id="p2-pitch" aria-label="Pitch resources">
-            <button class="pitch-dot pitch-dot--red"    data-color="red"    aria-label="Red pitch 1"></button>
-            <button class="pitch-dot pitch-dot--yellow" data-color="yellow" aria-label="Yellow pitch 2"></button>
-            <button class="pitch-dot pitch-dot--blue"   data-color="blue"   aria-label="Blue pitch 3"></button>
-          </div>
-          <div class="player__ap" id="p2-ap" aria-label="Action points">
-            <button class="player__ap-btn player__ap-btn--dec" aria-label="Decrease action points">−</button>
-            <span class="player__ap-value" id="p2-ap-value">0</span>
-            <button class="player__ap-btn player__ap-btn--inc" aria-label="Increase action points">+</button>
-          </div>
+      <!-- PLAYER 1 — left column -->
+      <section class="player player--left" id="player1" data-player="1">
+
+        <div class="counter counter--life">
+          <button class="counter__btn counter__btn--dec" data-counter="life" data-delta="-1" aria-label="Decrease life">−</button>
+          <span class="counter__value" id="p1-life">40</span>
+          <button class="counter__btn counter__btn--inc" data-counter="life" data-delta="1" aria-label="Increase life">+</button>
         </div>
 
-        <div class="player__life-zone">
-          <button class="player__life-tap player__life-tap--decrease" data-action="decrease" aria-label="Decrease life"></button>
-          <div class="player__life-display">
-            <span class="player__life-number" id="p2-life">20</span>
+        <div class="counter counter--pitch">
+          <button class="counter__btn counter__btn--dec" data-counter="pitch" data-delta="-1" aria-label="Decrease pitch">−</button>
+          <div class="pitch-disc">
+            <span class="counter__value" id="p1-pitch">1</span>
           </div>
-          <button class="player__life-tap player__life-tap--increase" data-action="increase" aria-label="Increase life"></button>
+          <button class="counter__btn counter__btn--inc" data-counter="pitch" data-delta="1" aria-label="Increase pitch">+</button>
         </div>
 
-        <div class="player__turn-row">
-          <button class="player__turn-btn" id="p2-turn-btn" aria-pressed="false" aria-label="Set Player 2 as active player"></button>
+        <div class="counter counter--ap">
+          <button class="counter__btn counter__btn--dec" data-counter="ap" data-delta="-1" aria-label="Decrease action points">−</button>
+          <span class="counter__value" id="p1-ap">1</span>
+          <button class="counter__btn counter__btn--inc" data-counter="ap" data-delta="1" aria-label="Increase action points">+</button>
+          <span class="counter__label">action points</span>
         </div>
+
       </section>
 
-      <!-- CENTRAL DIVIDER -->
-      <div class="center-bar">
-        <button class="combat-chain-btn" id="combat-chain-btn" aria-haspopup="dialog" aria-expanded="false">
-          Combat Chain
-        </button>
-        <button class="cc-main-close-btn" id="cc-main-close-btn" aria-label="Close active chain" hidden>
-          Close Chain
-        </button>
-      </div>
+      <!-- COMBAT CHAIN — permanent center column -->
+      <section class="cc-panel" aria-label="Combat Chain">
 
-      <!-- PLAYER 1 — bottom -->
-      <section class="player player--bottom" id="player1" data-player="1">
-        <div class="player__indicators">
-          <div class="player__pitch" id="p1-pitch" aria-label="Pitch resources">
-            <button class="pitch-dot pitch-dot--red"    data-color="red"    aria-label="Red pitch 1"></button>
-            <button class="pitch-dot pitch-dot--yellow" data-color="yellow" aria-label="Yellow pitch 2"></button>
-            <button class="pitch-dot pitch-dot--blue"   data-color="blue"   aria-label="Blue pitch 3"></button>
-          </div>
-          <div class="player__ap" id="p1-ap" aria-label="Action points">
-            <button class="player__ap-btn player__ap-btn--dec" aria-label="Decrease action points">−</button>
-            <span class="player__ap-value" id="p1-ap-value">1</span>
-            <button class="player__ap-btn player__ap-btn--inc" aria-label="Increase action points">+</button>
-          </div>
+        <div class="cc-keywords" role="group" aria-label="Attack keywords">
+          <button class="cc-keyword" data-keyword="go-again"  aria-pressed="false">go again</button>
+          <button class="cc-keyword" data-keyword="dominate"  aria-pressed="false">dominate</button>
+          <button class="cc-keyword" data-keyword="on-hit"    aria-pressed="false">on hit</button>
+          <button class="cc-keyword" data-keyword="piercing"  aria-pressed="false">piercing</button>
+          <button class="cc-keyword" data-keyword="overpower" aria-pressed="false">overpower</button>
+          <button class="cc-keyword" data-keyword="other"     aria-pressed="false">other</button>
         </div>
 
-        <div class="player__life-zone">
-          <button class="player__life-tap player__life-tap--decrease" data-action="decrease" aria-label="Decrease life"></button>
-          <div class="player__life-display">
-            <span class="player__life-number" id="p1-life">20</span>
-          </div>
-          <button class="player__life-tap player__life-tap--increase" data-action="increase" aria-label="Increase life"></button>
+        <div class="cc-attack-row">
+          <button class="cc-attack-btn cc-attack-btn--minus" id="cc-attack-minus" aria-label="Decrease attack">−</button>
+          <button class="cc-attack-value" id="cc-attack-value" aria-pressed="false" aria-label="Toggle attack hit">12</button>
+          <button class="cc-attack-btn cc-attack-btn--plus"  id="cc-attack-plus"  aria-label="Increase attack">+</button>
         </div>
-
-        <div class="player__turn-row">
-          <button class="player__turn-btn is-active" id="p1-turn-btn" aria-pressed="true" aria-label="Set Player 1 as active player"></button>
-        </div>
-      </section>
-
-    </div><!-- /#app -->
-
-    <!-- COMBAT CHAIN OVERLAY -->
-    <div class="cc-overlay" id="cc-overlay" role="dialog" aria-modal="true" aria-label="Combat Chain" hidden>
-      <div class="cc-panel">
-
-        <header class="cc-header">
-          <span class="cc-title">Combat Chain</span>
-        </header>
 
         <div class="cc-nav">
           <button class="cc-nav-btn" id="cc-prev" aria-label="Previous chain link" disabled>&#8592;</button>
@@ -100,29 +68,43 @@
           <button class="cc-nav-btn" id="cc-next" aria-label="Next chain link" disabled>&#8594;</button>
         </div>
 
-        <div class="cc-attack-row">
-          <button class="cc-attack-btn cc-attack-btn--minus" id="cc-attack-minus" aria-label="Decrease attack">−</button>
-          <span class="cc-attack-value" id="cc-attack-value">0</span>
-          <button class="cc-attack-btn cc-attack-btn--plus"  id="cc-attack-plus"  aria-label="Increase attack">+</button>
-        </div>
-
-        <div class="cc-keywords" role="group" aria-label="Attack keywords">
-          <button class="cc-keyword" data-keyword="go-again"  aria-pressed="false">Go Again</button>
-          <button class="cc-keyword" data-keyword="dominate"  aria-pressed="false">Dominate</button>
-          <button class="cc-keyword" data-keyword="overpower" aria-pressed="false">Overpower</button>
-        </div>
-
         <div class="cc-actions">
-          <button class="cc-next-link-btn" id="cc-next-link-btn">Next Chain Link</button>
-          <button class="cc-close-btn" id="cc-close-btn">Close Chain</button>
+          <button class="cc-next-link-btn" id="cc-next-link-btn">next link</button>
+          <button class="cc-close-btn" id="cc-close-btn">close chain</button>
         </div>
 
-      </div>
-    </div><!-- /.cc-overlay -->
+      </section>
+
+      <!-- PLAYER 2 — right column -->
+      <section class="player player--right" id="player2" data-player="2">
+
+        <div class="counter counter--life">
+          <button class="counter__btn counter__btn--dec" data-counter="life" data-delta="-1" aria-label="Decrease life">−</button>
+          <span class="counter__value" id="p2-life">40</span>
+          <button class="counter__btn counter__btn--inc" data-counter="life" data-delta="1" aria-label="Increase life">+</button>
+        </div>
+
+        <div class="counter counter--pitch">
+          <button class="counter__btn counter__btn--dec" data-counter="pitch" data-delta="-1" aria-label="Decrease pitch">−</button>
+          <div class="pitch-disc">
+            <span class="counter__value" id="p2-pitch">1</span>
+          </div>
+          <button class="counter__btn counter__btn--inc" data-counter="pitch" data-delta="1" aria-label="Increase pitch">+</button>
+        </div>
+
+        <div class="counter counter--ap">
+          <button class="counter__btn counter__btn--dec" data-counter="ap" data-delta="-1" aria-label="Decrease action points">−</button>
+          <span class="counter__value" id="p2-ap">1</span>
+          <button class="counter__btn counter__btn--inc" data-counter="ap" data-delta="1" aria-label="Increase action points">+</button>
+          <span class="counter__label">action points</span>
+        </div>
+
+      </section>
+
+    </div><!-- /#app -->
 
     <script src="js/state.js"></script>
     <script src="js/player.js"></script>
-    <script src="js/pitch.js"></script>
     <script src="js/combat-chain.js"></script>
     <script src="js/app.js"></script>
   </body>
