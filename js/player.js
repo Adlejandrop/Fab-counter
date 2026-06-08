@@ -46,6 +46,7 @@ const Player = (() => {
   function endTurn(playerId) {
     if (!State.endTurn(playerId)) return;
     [1, 2].forEach(id => render(id, 'ap'));
+    render(playerId, 'pitch');   // ending player's pitch reset to 0
     renderActive();
   }
 

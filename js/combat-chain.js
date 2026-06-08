@@ -3,6 +3,10 @@ const CombatChain = (() => {
 
   function open() {
     State.setChainOpen(true);
+    /* Opening the attack costs the active player 1 action point */
+    const active = State.getActivePlayer();
+    State.changeCounter(active, 'ap', -1);
+    Player.render(active, 'ap');
     _app.classList.add('is-chain-open');
     _render();
   }
@@ -86,7 +90,13 @@ const CombatChain = (() => {
 
     document.querySelectorAll('.cc-keyword').forEach(btn => {
       btn.addEventListener('click', () => {
-        State.toggleKeyword(btn.dataset.keyword);
+        const on = State.toggleKeyword(btn.dataset.keyword);
+        /* Go again grants the active player an extra action point */
+        if (btn.dataset.keyword === 'go-again') {
+          const active = State.getActivePlayer();
+          State.changeCounter(active, 'ap', on ? 1 : -1);
+          Player.render(active, 'ap');
+        }
         _render();
       });
     });

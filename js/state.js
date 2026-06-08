@@ -20,8 +20,8 @@ const State = (() => {
   const _state = {
     activePlayer: 1,
     players: {
-      1: { life: 40, pitch: 1, ap: 0 },
-      2: { life: 40, pitch: 1, ap: 0 },
+      1: { life: 40, pitch: 0, ap: 0 },
+      2: { life: 40, pitch: 0, ap: 0 },
     },
     combatChain: {
       open: false,
@@ -45,9 +45,10 @@ const State = (() => {
   function endTurn(playerId) {
     if (_state.activePlayer !== playerId) return false;
     const other = playerId === 1 ? 2 : 1;
-    _state.players[playerId].ap = 0;
-    _state.players[other].ap    = 1;
-    _state.activePlayer         = other;
+    _state.players[playerId].ap    = 0;
+    _state.players[playerId].pitch = 0;   // pitch empties when the turn ends
+    _state.players[other].ap       = 1;
+    _state.activePlayer            = other;
     return true;
   }
 

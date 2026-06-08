@@ -2,22 +2,34 @@
 
 .player {
   position: relative;
+  container-type: size;   /* cqw/cqh below resolve to this cell's size */
+  overflow: hidden;
+}
+
+/* Inner content is rotated 90° to face the player seated on that side.
+   Width/height are swapped (cqh/cqw) so it fills the cell after rotation. */
+.player__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100cqh;
+  height: 100cqw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: var(--space-lg) var(--space-sm);
+  padding: var(--space-lg) clamp(34px, 7vmin, 70px);
   gap: var(--space-md);
-  overflow: hidden;
 }
 
-.player--left  { padding-left:  clamp(34px, 7vmin, 70px); }
-.player--right { padding-right: clamp(34px, 7vmin, 70px); }
+.player--left  .player__inner { transform: translate(-50%, -50%) rotate(90deg); }
+.player--right .player__inner { transform: translate(-50%, -50%) rotate(-90deg); }
 
 /* ── Active-player turn bar ────────────────────────── */
 
 .turn-bar {
   position: absolute;
+  z-index: 5;                    /* above the rotated inner so taps register */
   top: clamp(10px, 4vmin, 44px);
   bottom: clamp(10px, 4vmin, 44px);
   width: clamp(16px, 3vmin, 34px);
