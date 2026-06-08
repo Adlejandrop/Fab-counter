@@ -1,5 +1,5 @@
 const CombatChain = (() => {
-  let _attackValueEl, _indicatorEl, _prevBtn, _nextBtn, _app, _panel, _openBtn;
+  let _attackValueEl, _indicatorEl, _prevBtn, _nextBtn, _nextLinkBtn, _app, _panel, _openBtn;
 
   function open() {
     State.setChainOpen(true);
@@ -37,6 +37,9 @@ const CombatChain = (() => {
     _prevBtn.disabled = idx === 0;
     _nextBtn.disabled = idx === total - 1;
 
+    /* Next link costs 1 AP — only pressable while active player has AP */
+    _nextLinkBtn.disabled = State.getPlayer(State.getActivePlayer()).ap <= 0;
+
     document.querySelectorAll('.cc-keyword').forEach(btn => {
       const active = link.keywords[btn.dataset.keyword];
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
@@ -51,13 +54,19 @@ const CombatChain = (() => {
     _indicatorEl   = document.getElementById('cc-link-indicator');
     _prevBtn       = document.getElementById('cc-prev');
     _nextBtn       = document.getElementById('cc-next');
+    _nextLinkBtn   = document.getElementById('cc-next-link-btn');
 
     _openBtn.addEventListener('click', open);
 
     /* close chain → reset links and collapse back to the icon */
     document.getElementById('cc-close-btn').addEventListener('click', close);
 
-    document.getElementById('cc-next-link-btn').addEventListener('click', () => {
+    _nextLinkBtn.addEventListener('click', () => {
+      const active = State.getActivePlayer();
+      /* Guard: no AP → no next link */
+      if (State.getPlayer(active).ap <= 0) return;
+      State.changeCounter(active, 'ap', -1);
+      Player.render(active, 'ap');
       State.addChainLink();
       _render();
     });
